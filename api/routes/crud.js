@@ -163,4 +163,14 @@ module.exports = function (router) {
 
         }
     })
+
+    router.put('/bill/:id',async function (req, res) {
+        try{
+            let billData=await bills.findByIdAndUpdate({_id:req.params.id},{$set:{status:'PAID'}});
+            return res.success(billData);
+        }
+        catch(err){
+            res.invalidInput(err)
+        }
+    });
 }
